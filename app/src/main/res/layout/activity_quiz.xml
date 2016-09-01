@@ -4,6 +4,8 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <!--
+    Question text-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +19,8 @@
         android:orientation="horizontal"
         >
 
+        <!--
+        This section is for the true button-->
         <Button
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
@@ -24,6 +28,8 @@
             android:text="@string/true_button"
             />
 
+        <!--
+        This is for the false button-->
         <Button
             android:id="@+id/false_button"
             android:layout_width="wrap_content"

@@ -32,7 +32,8 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(QuizActivity.this, R.string.incorrect_toast,
+                Toast.makeText(QuizActivity.this, R.string.incorrect_toast, // This is the wrong answer, Constantinople
+                                                                            // or Istanbul is the largest city in Turkey.
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -43,7 +44,7 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(QuizActivity.this, R.string.correct_toast,
+                Toast.makeText(QuizActivity.this, R.string.correct_toast, // Wrong answer
                         Toast.LENGTH_SHORT).show();
             }
         });
