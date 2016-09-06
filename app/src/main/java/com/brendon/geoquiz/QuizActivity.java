@@ -78,6 +78,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
         mTrueButton = (Button) findViewById(R.id.true_button);
+
         /*
         True button Listener
          */
