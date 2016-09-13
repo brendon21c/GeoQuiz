@@ -1,5 +1,6 @@
 package com.brendon.geoquiz;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,6 +30,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     private TextView mQuestionTextView;
     private int mCurrentIndex = 0;
+    private boolean mIsCheater;
 
 
     /*
@@ -46,13 +48,20 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
-        if (userPressedTrue == answerIsTrue) {
+        if (mIsCheater) {
 
-            messageResId = R.string.correct_toast;
+            messageResId = R.string.judgment_toast;
 
         } else {
 
-            messageResId = R.string.incorrect_toast;
+            if (userPressedTrue == answerIsTrue) {
+
+                messageResId = R.string.correct_toast;
+
+            } else {
+
+                messageResId = R.string.incorrect_toast;
+            }
         }
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
@@ -119,6 +128,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mIsCheater = false;
                 updateQuestion();
             }
         });
@@ -149,10 +159,30 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode != Activity.RESULT_OK) {
+
+            return;
+
+        }
+
+        else if (requestCode == REQUEST_CODE_CHEAT) {
+
+            if (data == null) {
+
+                return;
+            }
+
+            mIsCheater = CheatActivity.wasAnswerShown(data);
+        }
+    }
+
     /*
-    This section "saves" the current question index to the program, so that
-    starts where it left off.
-     */
+        This section "saves" the current question index to the program, so that
+        starts where it left off.
+         */
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
