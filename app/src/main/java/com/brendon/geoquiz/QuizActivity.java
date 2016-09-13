@@ -1,5 +1,7 @@
 package com.brendon.geoquiz;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,9 +21,11 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
 
+
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
     private int mCurrentIndex = 0;
 
@@ -108,6 +112,7 @@ public class QuizActivity extends AppCompatActivity {
          */
 
         mNextButton = (Button) findViewById(R.id.next_button);
+
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +121,22 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+
+        // Cheat Button
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Start CheatActivity
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent i = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                startActivity(i);
+
+            }
+        });
+
 
         if (savedInstanceState != null) {
 
